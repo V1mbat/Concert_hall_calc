@@ -1,9 +1,16 @@
-function reduction_factor = singlewall(f, t, rho, eta, E, nu)
+function reduction_factor = singlewall(f, para)
+
+t = para.t;
+rho = para.rho;
+eta = para.eta;
+E = para.E;
+nu = para.nu;
+m = para.m;
 
 c_0 = 340;
 rho_0 = 1.2;
 
-m = rho*t;
+
 B = E *(t^3/(12*(1-nu^2)));
 
 f_c = c_0^2/(2*pi)*sqrt(m/B);
