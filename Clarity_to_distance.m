@@ -53,9 +53,6 @@ att_coeff = [0 0 0.0024 0.0042 0.0089 0.0262];      % attanuation coeff
 T_60_calc_seated = 24*log(10)*V./(c*(4*att_coeff*V - area_audience*log(1-abs_seated)));
 T_60_calc_empty = 24*log(10)*V./(c*(4*att_coeff*V - area_audience*log(1-abs_empty)));
 
-%% isolation
-
-
 %% plots
 figure(1)
 plot(r, E_early)
