@@ -27,3 +27,10 @@ reduction_index1 = doublewall(f,wall1,wall2,d_z);
 
 reduction_index2 = singlewall(f,wall1);
 
+%%
+L_facade = [73 75 80 66 54 50]; % SPL at facade
+NC_20 = [40	33	26	22	19	17];% noise requirement in concert hall
+
+f_c = 10^3 * (2.^((-3:2)));
+
+red_oct = mean_oct(f_c, reduction_index2);
