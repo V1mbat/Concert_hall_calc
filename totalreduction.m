@@ -32,13 +32,15 @@ f = 1:10000;                    % frequency domain
 reduction_index1 = doublewall(f,wall1,wall2,d_z);
 
 reduction_index2 = singlewall(f,wall1);
+%%
+reduction_index3 = singlewall(f,wall2);
 
 %% lobby
 red_oct = mean_oct(f_c, reduction_index1);
 
 S_lobby = 1100;                 % area of the outer wall of the lobby in m^2
 V_lobby = 12070;                % volume of lobby
-T_lobby = 0.8;                  % reverb time lobby
+T_lobby = 1.0;                  % reverb time lobby
 A_lobby = 0.163*V_lobby/T_lobby;% equivilant absorption area in lobby
 
 L_lobby = L_facade + 3 - red_oct + 10*log10(S_lobby/A_lobby);
@@ -53,3 +55,12 @@ thickenall_big
 xlabel('f in Hz')
 ylabel('L_{SPL} in dB')
 legend('L_{Lobby}','NC_{20}')
+
+figure
+semilogx(f, reduction_index1)
+hold on
+semilogx(f, reduction_index2)
+semilogx(f, reduction_index3)
+legend('double wall', 'wall 1', 'wall 2')
+thickenall_big
+

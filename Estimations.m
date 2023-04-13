@@ -35,7 +35,6 @@ lambda = c./f;
 abs = lambda./4;
 
 %% reverb time and absorption of audience and seats
-
 % All tables are for the octave bands from 125 Hz to 4 kHz
 
 f_oct = [125 250 500 1000 2000 4000];

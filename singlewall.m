@@ -14,11 +14,17 @@ B = E *(t^3/(12*(1-nu^2)));
 
 f_c = c_0^2/(2*pi)*sqrt(m/B);
 
-temp = 20*log10(2*pi*f.*m./(2*rho_0*c_0)); 
+R_0 = 20*log10(m) + 20*log10(f) - 42; 
+perc = 0.0;
+temp = zeros(1,length(f));
 
 for i = 1:length(f)
-    if f(i) > f_c
-        temp(i) = temp(i) + 10*log10(f(i)/f_c) + 10*log10(2*eta/pi);
+    if f(i) < round((1-perc)*f_c)
+        temp(i) = R_0(i) - 7;
+    elseif f(i) >= round((1-perc)*f_c) && f(i) < round((1+perc)*f_c)
+        temp(i) = R_0(i) - 7 + 10*log10(eta) + 8;
+    elseif f(i) >= round((1+perc)*f_c)
+        temp(i) = R_0(i) + 10*log10(f(i)/f_c - 1) + 10*log10(eta) - 2; 
     end
 end
 reduction_factor = temp;
