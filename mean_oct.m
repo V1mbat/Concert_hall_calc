@@ -6,7 +6,7 @@ for i = 1:length(f_c)
     f_low = f_c(i)/sqrt(2);
     
     temp(i) = mean(reduction(round(f_low):round(f_up)));
-    
 end
+
 reduction_oct = temp;
 end

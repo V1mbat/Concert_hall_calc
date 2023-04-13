@@ -61,7 +61,7 @@ grid on
 plot(r, E_late)
 
 figure(2)
-plot(r,C_80)
+plot(r, C_80)
 thickenall_big;
 grid on
 xlabel('Distance r in m')
@@ -69,7 +69,7 @@ ylabel('Clarity C_{80} in dB')
 ylim([-5 20])
 
 figure(3)
-plot(r,G)
+plot(r, G)
 thickenall_big;
 grid on 
 xlabel('Distance r in m')
