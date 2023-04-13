@@ -23,10 +23,7 @@ rho_0 = 1.2;            % density air
 
 f = 1:10000;            % frequency domain
 
-% para.K = para.rho_air*para.c^2/para.d_z;
-% para.m_eff = para.m1*para.m2/(para.m1+para.m2);
-% 
-% para.f_d = 1/(2*pi)*sqrt(para.K/para.m_eff);
-% 
-% lamda = para.c./f;      % wavelength
-%%
+reduction_index1 = doublewall(f,wall1,wall2,d_z);
+
+reduction_index2 = singlewall(f,wall1);
+

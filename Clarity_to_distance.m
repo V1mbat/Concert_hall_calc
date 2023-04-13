@@ -40,7 +40,7 @@ abs = lambda./4;
 
 f_oct = [125 250 500 1000 2000 4000];
 
-area_peraudiencemember = 0.5*0.55;                 % area per seat
+area_peraudiencemember = 0.5*0.55;                  % area per seat
 
 area_audience = 2300 * area_peraudiencemember;      % area of whole audience
 
