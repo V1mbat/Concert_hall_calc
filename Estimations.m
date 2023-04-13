@@ -54,13 +54,8 @@ T_60_calc_seated = 24*log(10)*V./(c*(4*att_coeff*V - area_audience*log(1-abs_sea
 T_60_calc_empty = 24*log(10)*V./(c*(4*att_coeff*V - area_audience*log(1-abs_empty)));
 
 %% plots
-figure(1)
-plot(r, E_early)
-hold on 
-grid on
-plot(r, E_late)
 
-figure(2)
+figure
 plot(r, C_80)
 thickenall_big;
 grid on
@@ -68,7 +63,7 @@ xlabel('Distance r in m')
 ylabel('Clarity C_{80} in dB')
 ylim([-5 20])
 
-figure(3)
+figure
 plot(r, G)
 thickenall_big;
 grid on 
@@ -77,7 +72,7 @@ ylabel('Strength G in dB')
 xlim([0 40])
 ylim([-5 20])
 
-figure(4)
+figure
 semilogx(f_oct, T_60_calc_empty)
 hold on
 grid on

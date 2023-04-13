@@ -50,3 +50,6 @@ hold on
 grid on 
 semilogx(f_c, NC_20)
 thickenall_big
+xlabel('f in Hz')
+ylabel('L_{SPL} in dB')
+legend('L_{Lobby}','NC_{20}')
