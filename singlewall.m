@@ -15,7 +15,7 @@ B = E *(t^3/(12*(1-nu^2)));
 f_c = c_0^2/(2*pi)*sqrt(m/B);
 
 R_0 = 20*log10(m) + 20*log10(f) - 42; 
-perc = 0.0;
+perc = 0.3;
 temp = zeros(1,length(f));
 
 for i = 1:length(f)
