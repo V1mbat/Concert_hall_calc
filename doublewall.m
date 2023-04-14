@@ -2,6 +2,7 @@ function total_reduction = doublewall(f, para1, para2, d)
 
 c_0 = 340;
 rho_0 = 1.2;
+f_c = 10^3 * (2.^((-3:2)));
 
 r1 = singlewall(f, para1);
 r2 = singlewall(f, para2);
@@ -35,6 +36,6 @@ for i = 1:length(f)
     end
 
 end
-
+temp = mean_oct(f_c,temp);
 total_reduction = temp;
 end
