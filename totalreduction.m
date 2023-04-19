@@ -16,11 +16,11 @@ rho_0 = 1.2;                    % density air
 % the format of the data should be like below
 
 % wall 1
-wall1.rho = 900;                % density wall 1
-wall1.t = 0.25;                  % thickness wall 1
+wall1.rho = 3000;                % density wall 1
+wall1.t = 0.15;                  % thickness wall 1
 wall1.m = wall1.rho * wall1.t;  % mass per unit area wall 1
-wall1.eta = 0.015;              % loss factor wall 1
-wall1.E = 10E9;                 % young's modulus wall 1
+wall1.eta = 0.005;              % loss factor wall 1
+wall1.E = 35E9;                 % young's modulus wall 1
 wall1.nu = 0.3;                 % poisson ratio wall 1
 
 % wall 2
@@ -68,20 +68,20 @@ r4_single = [31 36 39 38 42 44];
 % adjust S_12 and S_34 for the areas of the partitions
 
 S_12 = 1500;        % area of the double wall made out of wall 1 and wall 2
-S_34 = 100;         % area of the double wall made out of wall 3 and wall 4
+S_1 = 1500;         % area of the double wall made out of wall 3 and wall 4
 
-r_comb = 10*log10((S_12+S_34)./(S_12*10.^(-r12_double/10) + S_34*10.^(-r34_double/10)));
-
+r_comb = 10*log10((S_12+S_1)./(S_12*10.^(-r12_double/10) + S_1*10.^(-r34_double/10)));
+r_test = r1_single + r2_single;
 %% room parameters
 
-S_hall = S_12 + S_34;           % area of the outer wall of the hall in m^2
+S_hall = S_12 + S_1;           % area of the outer wall of the hall in m^2
 V_hall = 18070;                 % volume of hall
 T_hall = 2.0;                   % reverb time hall
 A_hall = 0.163*V_hall/T_hall;   % equivilant absorption area in hall
 
 L_hall = L_facade + 3 - r_comb + 10*log10(S_hall/A_hall);
 
-S_lobby = S_12 + S_34;           % area of the outer wall of the hall in m^2
+S_lobby = S_12 + S_1;           % area of the outer wall of the hall in m^2
 V_lobby = 18070;                 % volume of hall
 T_lobby = 2.0;                   % reverb time hall
 A_lobby = 0.163*V_lobby/T_lobby; % equivilant absorption area in hall

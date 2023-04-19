@@ -8,20 +8,20 @@ f_oct = [125 250 500 1000 2000 4000];
 c = 340;                                            % speed of sound
 
 % things you should adjust
-V = 18000;                                          % Volume of concert hall
-S_peraudiencemember = 0.5*0.55;                     % area per seat
-S_absorber = 0;                                 % total area of absorbers
-S_absorber_low = 500;
+V = 19000;                                          % Volume of concert hall
+S_peraudiencemember = 0.5*0.45;                     % area per seat
+S_absorber = 50;                                   % area of normal absorbers
+S_absorber_low = 600;                               % area of low frequency absorbers
 % end
 
 S_audience = 2300 * S_peraudiencemember;            % area of whole audience
 
 abs_occ = [0.62 0.72 0.8 0.83 0.84 0.85];           % absorption coeff seated
 abs_empty = [0.54 0.62 0.68 0.7 0.68 0.66];         % absorption coeff empty
-att_coeff = [0 0 0.001 0.002 0.004 0.01];           % attanuation coeff
+att_coeff = [0 0 0.001 0.002 0.004 0.0086];           % attanuation coeff
 
 
-abs_absorber = [0.7	0.95 0.95 0.88 0.85 0.9];       % absorption coeff of absorber (example)
+abs_absorber = [0.7	0.95 0.95 0.95 0.9 0.9];       % absorption coeff of absorber (example)
 abs_absorber_low = [0.75 0.65 0.5 0.2 0.1 0.1];     % absorption coeff of low freq absorber
 
 A_absorber = - S_absorber * log(1-abs_absorber);    % eq. absorption area of absorbers
@@ -125,7 +125,7 @@ thickenall_big;
 xticks(f_oct);
 xticklabels({'125', '250', '500', '1k', '2k', '4k'})
 %xlim([0 5000])
-ylim([0 5])
+ylim([0 3])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
 legend('empty','seated')
