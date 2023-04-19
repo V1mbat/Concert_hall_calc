@@ -16,8 +16,8 @@ rho_0 = 1.2;                    % density air
 % the format of the data should be like below
 
 % wall 1
-wall1.rho = 900;                % density wall 1
-wall1.t = 0.25;                  % thickness wall 1
+wall1.rho = 700;                % density wall 1
+wall1.t = 0.3;                  % thickness wall 1
 wall1.m = wall1.rho * wall1.t;  % mass per unit area wall 1
 wall1.eta = 0.015;              % loss factor wall 1
 wall1.E = 10E9;                 % young's modulus wall 1
@@ -41,7 +41,7 @@ wall3.nu = 0.3;                 % poisson ratio wall 3
 
 % glass 2
 wall4.rho = 2500;                % density wall 1
-wall4.t = 0.1;                  % thickness wall 1
+wall4.t = 0.05;                  % thickness wall 1
 wall4.m = wall4.rho * wall4.t;  % mass per unit area wall 1
 wall4.eta = 1E-4;               % loss factor wall 3
 wall4.E = 80E9;                 % young's modulus wall 3
@@ -53,13 +53,14 @@ d_2 = 0.05;                     % distance between wall 3 and wall 4
 
 f = 1:10000;                    % frequency domain
 %% reduction indexi of doublewalls and each wall 
-r12_double = doublewall(f,wall1,wall2,d_1,false);  % reduction index for doublewall (wall 1 and wall 2)
-r34_double = doublewall(f_c,wall3,wall4,d_2,true);  % reduction index for doublewall (wall 3 and wall 4) 
+r12_double = doublewall(f,wall1,wall2,d_1);  % reduction index for doublewall (wall 1 and wall 2)
+r34_double = doublewall(f,wall3,wall4,d_2);  % reduction index for doublewall (wall 3 and wall 4) 
 
 r1_single = mean_oct(f_c, singlewall(f,wall1));
 r2_single = mean_oct(f_c, singlewall(f,wall2));
-r3_single = [31 36 39 38 42 44];
-r4_single = [31 36 39 38 42 44];
+r3_single = mean_oct(f_c, singlewall(f,wall3));
+r4_single = mean_oct(f_c, singlewall(f,wall4));
+
 
 %% for having multiple wall sections:
 % this calculates the overall reduction index of the wall, when part of the
@@ -81,13 +82,6 @@ A_hall = 0.163*V_hall/T_hall;   % equivilant absorption area in hall
 
 L_hall = L_facade + 3 - r_comb + 10*log10(S_hall/A_hall);
 
-S_lobby = S_12 + S_34;           % area of the outer wall of the hall in m^2
-V_lobby = 18070;                 % volume of hall
-T_lobby = 2.0;                   % reverb time hall
-A_lobby = 0.163*V_lobby/T_lobby; % equivilant absorption area in hall
-
-L_lobby = L_facade + 3 - r1_single + 10*log10(S_lobby/A_lobby);
-
 %% plotting
 figure
 semilogx(f_c, L_hall)
@@ -105,3 +99,6 @@ semilogx(f_c, r_comb)
 legend('combined reduction index')
 grid on
 thickenall_big
+
+
+
