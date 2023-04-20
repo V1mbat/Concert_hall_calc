@@ -8,10 +8,10 @@ f_oct = [125 250 500 1000 2000 4000];
 c = 340;                                            % speed of sound
 
 % things you should adjust
-V = 19000;                                          % Volume of concert hall
-S_peraudiencemember = 0.5*0.45;                     % area per seat
-S_absorber = 50;                                   % area of normal absorbers
-S_absorber_low = 600;                               % area of low frequency absorbers
+V = 18000;                                          % Volume of concert hall
+S_peraudiencemember = 0.5*0.55;                     % area per seat
+S_absorber = 0;                                   % area of normal absorbers
+S_absorber_low = 300;                               % area of low frequency absorbers
 % end
 
 S_audience = 2300 * S_peraudiencemember;            % area of whole audience
