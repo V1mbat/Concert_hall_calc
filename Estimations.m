@@ -2,19 +2,17 @@ clc
 close all
 clear
 
-%% reverb time and absorption of audience and seats
+%% reverb time and absorption of concert hall
 % All tables are for the octave bands from 125 Hz to 4 kHz
 f_oct = [125 250 500 1000 2000 4000];
 c = 340;                                            % speed of sound
 
 % things you should adjust
-V = 18000;                                          % Volume of concert hall
+V = 20000;                                          % Volume of concert hall
 S_peraudiencemember = 0.5*0.55;                     % area per seat
-S_absorber = 200;                                   % area of normal absorbers
-S_absorber_low = 600;                               % area of low frequency absorbers
+S_absorber = 0;                                   % area of normal absorbers
+S_absorber_low = 0;                               % area of low frequency absorbers
 % end
-
-S_audience = 2300 * S_peraudiencemember;            % area of whole audience
 
 abs_occ = [0.62 0.72 0.8 0.83 0.84 0.85];           % absorption coeff seated
 abs_empty = [0.54 0.62 0.68 0.7 0.68 0.66];         % absorption coeff empty
@@ -24,15 +22,26 @@ att_coeff = [0 0 0.001 0.002 0.004 0.0086];           % attanuation coeff
 abs_absorber = [0.7	0.95 0.95 0.95 0.9 0.9];       % absorption coeff of absorber (example)
 abs_absorber_low = [0.75 0.65 0.5 0.2 0.1 0.1];     % absorption coeff of low freq absorber
 abs_wood = [0.15 0.11 0.10 0.07 0.06 0.07];
+abs_glass = [0.18 0.06 0.04 0.05 0.02 0.02];
 
+S_audience = 2300 * S_peraudiencemember;            % area of whole audience
+S_concerthall_wall = 5850;
+S_window = 117.6;
+
+A_concerthall_wall = abs_wood*S_concerthall_wall;
 A_absorber = - S_absorber * log(1-abs_absorber);    % eq. absorption area of absorbers
 A_absorber_low = - S_absorber_low * log(1-abs_absorber_low);
+A_glass = abs_glass*S_window;
 A_occ = - S_audience*log(1-abs_occ);                % eq. absorption area of audience
 A_empty = - S_audience*log(1-abs_empty);            % eq. absorption area of seats
 
+A_total_occ = A_concerthall_wall + A_absorber + A_absorber_low + A_glass + A_occ; 
+A_total_empty = A_concerthall_wall + A_absorber + A_absorber_low + A_glass + A_empty; 
+
+
 % reverb time when seated and empty
-T_60_calc_occ = 24*log(10)*V./(c*(4*att_coeff*V + A_occ + A_absorber + A_absorber_low));
-T_60_calc_empty = 24*log(10)*V./(c*(4*att_coeff*V + A_empty + A_absorber + A_absorber_low));
+T_60_calc_occ = 24*log(10)*V./(c*(4*att_coeff*V + A_total_occ));
+T_60_calc_empty = 24*log(10)*V./(c*(4*att_coeff*V + A_total_empty));
 
 %% clarity
 r = 1:0.1:50;       % distance
