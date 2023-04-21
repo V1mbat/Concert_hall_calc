@@ -16,11 +16,11 @@ rho_0 = 1.2;                    % density air
 % the format of the data should be like below
 
 % wall 1
-wall1.rho = 3000;               % density wall 1
+wall1.rho = 900;               % density wall 1
 wall1.t = 0.15;                 % thickness wall 1
 wall1.m = wall1.rho * wall1.t;  % mass per unit area wall 1
-wall1.eta = 0.005;              % loss factor wall 1
-wall1.E = 35E9;                 % young's modulus wall 1
+wall1.eta = 0.025;              % loss factor wall 1
+wall1.E = 10E9;                 % young's modulus wall 1
 wall1.nu = 0.3;                 % poisson ratio wall 1
 
 % wall 2
@@ -46,22 +46,6 @@ wall4.m = wall4.rho * wall4.t;  % mass per unit area wall 1
 wall4.eta = 1E-4;               % loss factor wall 3
 wall4.E = 80E9;                 % young's modulus wall 3
 wall4.nu = 0.3;                 % poisson ratio wall 3
-
-% % glass 1
-% wall3.rho = 2500;               % density wall 3
-% wall3.t = 0.042;                 % thickness wall 3
-% wall3.m = wall3.rho * wall3.t;  % mass per unit area wall 3
-% wall3.eta = 1E-4;               % loss factor wall 3
-% wall3.E = 80E9;                 % young's modulus wall 3
-% wall3.nu = 0.3;                 % poisson ratio wall 3
-% 
-% % glass 2
-% wall4.rho = 2500;               % density wall 1
-% wall4.t = 0.009;                 % thickness wall 1
-% wall4.m = wall4.rho * wall4.t;  % mass per unit area wall 1
-% wall4.eta = 1E-4;               % loss factor wall 3
-% wall4.E = 80E9;                 % young's modulus wall 3
-% wall4.nu = 0.3;                 % poisson ratio wall 3
 
 % distance between the walls
 d_1 = 0.25;                     % distance between wall 1 and wall 2

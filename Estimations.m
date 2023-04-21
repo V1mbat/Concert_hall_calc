@@ -10,8 +10,8 @@ c = 340;                                            % speed of sound
 % things you should adjust
 V = 18000;                                          % Volume of concert hall
 S_peraudiencemember = 0.5*0.55;                     % area per seat
-S_absorber = 0;                                   % area of normal absorbers
-S_absorber_low = 300;                               % area of low frequency absorbers
+S_absorber = 200;                                   % area of normal absorbers
+S_absorber_low = 600;                               % area of low frequency absorbers
 % end
 
 S_audience = 2300 * S_peraudiencemember;            % area of whole audience
@@ -93,27 +93,27 @@ for i = n_person
 end
 %% plots
 
-% clarity
-figure
-plot(r, C_80_occ)
-hold on
-thickenall_big;
-grid on
-xlabel('Distance r in m')
-ylabel('Clarity C_{80} in dB')
-legend('125','250','500','1k','2k','4k')
-%ylim([-5 20])
-
-% strength
-figure
-plot(r, G)
-thickenall_big;
-grid on 
-legend('125','250','500','1k','2k','4k')
-xlabel('Distance r in m')
-ylabel('Strength G in dB')
-xlim([0 40])
-ylim([-5 20])
+% % clarity
+% figure
+% plot(r, C_80_occ)
+% hold on
+% thickenall_big;
+% grid on
+% xlabel('Distance r in m')
+% ylabel('Clarity C_{80} in dB')
+% legend('125','250','500','1k','2k','4k')
+% %ylim([-5 20])
+% 
+% % strength
+% figure
+% plot(r, G)
+% thickenall_big;
+% grid on 
+% legend('125','250','500','1k','2k','4k')
+% xlabel('Distance r in m')
+% ylabel('Strength G in dB')
+% xlim([0 40])
+% ylim([-5 20])
 
 % T_60 in concert hall
 figure
