@@ -8,7 +8,6 @@ f_oct = [125 250 500 1000 2000 4000];
 c = 340;                                            % speed of sound
 
 %%
-
 abs_occ = [0.62 0.72 0.8 0.83 0.84 0.85];           % absorption coeff seated
 abs_empty = [0.54 0.62 0.68 0.7 0.68 0.66];         % absorption coeff empty
 att_coeff = [0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
@@ -25,9 +24,8 @@ abs_stone = [0.01 0.01 0.015 0.02 0.02 0.02];
 V = 19400;                                          % Volume of concert hall
 S_peraudiencemember = 0.5*0.55;                     % area per seat
 S_absorber = 0;                                   % area of normal absorbers
-S_absorber_low = 0;                               % area of low frequency absorbers
+S_absorber_low = 250;                               % area of low frequency absorbers
 % end
-
 
 S_audience = 2300 * S_peraudiencemember;            % area of whole audience
 S_concerthall_wall = 5450;
@@ -91,8 +89,8 @@ end
 %% rehersal room
 
 % things you should adjust 
-S_absorber_rehersal = 0;
-S_absorber_low_rehersal = 0; 
+S_absorber_rehersal = 70;
+S_absorber_low_rehersal = 40; 
 
 n_person = 1:50;                             % number of people in rehersal room
 V_rehersal = 1470;                       % Volume of rehersal room
