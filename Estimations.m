@@ -24,7 +24,7 @@ abs_stone = [0.01 0.01 0.015 0.02 0.02 0.02];
 V = 19400;                                          % Volume of concert hall
 S_peraudiencemember = 0.5*0.55;                     % area per seat
 S_absorber = 0;                                   % area of normal absorbers
-S_absorber_low = 250;                               % area of low frequency absorbers
+S_absorber_low = 0;                               % area of low frequency absorbers
 % end
 
 S_audience = 2300 * S_peraudiencemember;            % area of whole audience
