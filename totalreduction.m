@@ -109,8 +109,8 @@ semilogx(f_c, L_hall)
 hold on
 grid on 
 semilogx(f_c, NC_20)
-semilogx(f, r3_single)
-semilogx(f, r4_single)
+%semilogx(f, r3_single)
+%semilogx(f, r4_single)
 thickenall_big
 xlabel('f in Hz')
 ylabel('L_{SPL} in dB')
