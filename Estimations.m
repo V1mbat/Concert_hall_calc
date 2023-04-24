@@ -3,6 +3,7 @@ close all
 clear
 
 %% reverb time and absorption of concert hall
+% Mepfit Room  
 % All tables are for the octave bands from 125 Hz to 4 kHz
 f_oct = [125 250 500 1000 2000 4000];
 c = 340;                                            % speed of sound
@@ -119,7 +120,7 @@ S_walls_L1 = 780;
 S_floor_L1 = 1255;
 S_window_L1 = 125;
 S_absorber_L1 = 50;
-S_absorber_low_L1 = 150;
+S_absorber_low_L1 = 250;
 
 V_lobby2 = 4500;
 S_ceiling_L2 = 1090;
@@ -127,7 +128,7 @@ S_walls_L2 = 680;
 S_floor_L2 = 900;
 S_window_L2 = 125;
 S_absorber_L2 = 50;
-S_absorber_low_L2 = 100;
+S_absorber_low_L2 = 150;
 
 
 A_ceiling_L1 = S_ceiling_L1*abs_wood;
@@ -149,6 +150,11 @@ A_total_L2 = A_ceiling_L2 + A_walls_L2 + A_floor_L2 + A_window_L2 + A_absorber_L
 T_60_Lobby1 = 24*log(10)*V_lobby1./(c*(4*att_coeff*V_lobby1 + A_total_L1));
 T_60_Lobby2 = 24*log(10)*V_lobby2./(c*(4*att_coeff*V_lobby2 + A_total_L2));
 
+%% MEPFIT
+V_mepfit = 2.7*25*5 + 11*23*5 + 28*16*5;
+S_mepfit = 2*(2.7*25 + 11*23 + 28*16) + 2*(25+23+28)*5;
+
+A_mepfit = S_mepfit*abs_wood;
 %% plots
 
 % % clarity

@@ -90,7 +90,7 @@ r_test = r1_single + r2_single;
 %% room parameters
 
 S_hall = S_12 + S_34;           % area of the outer wall of the hall in m^2
-V_hall = 19000;                 % volume of hall
+V_hall = 21727;                 % volume of hall
 T_hall = 2.0;                   % reverb time hall
 A_hall = 0.163*V_hall/T_hall;   % equivilant absorption area in hall
 
