@@ -13,7 +13,10 @@ abs_empty = [0.54 0.62 0.68 0.7 0.68 0.66];         % absorption coeff empty
 att_coeff = [0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
 
 abs_absorber = [0.7	0.95 0.95 0.95 0.9 0.9];        % absorption coeff of absorber (example)
-abs_absorber_low = [0.75 0.65 0.5 0.2 0.1 0.1];     % absorption coeff of low freq absorber
+abs_absorber_lobby = [0.7 0.95 0.95 0.95 0.95 0.9];        % absorption coeff of absorber (example)
+abs_absorber_low = [0.7 0.75 0.35 0.2 0.1 0.1];     % absorption coeff of low freq absorber
+abs_absorber_low_lobby = [0.85 0.65 0.5 0.2 0.1 0.1];     % absorption coeff of low freq absorber
+
 abs_wood = [0.15 0.11 0.10 0.07 0.06 0.07];
 abs_glass = [0.18 0.06 0.04 0.05 0.02 0.02];
 abs_brick = [0.03 0.03 0.03 0.04 0.05 0.07];
@@ -22,24 +25,26 @@ abs_stone = [0.01 0.01 0.015 0.02 0.02 0.02];
 %%
 % things you should adjust
 V = 19400;                                          % Volume of concert hall
-S_peraudiencemember = 0.5*0.55;                     % area per seat
+S_peraudiencemember = 0.5*0.5;                     % area per seat
 S_absorber = 200;                                   % area of normal absorbers
-S_absorber_low = 300;                               % area of low frequency absorbers
+S_absorber_low = 135;                               % area of low frequency absorbers
 % end
 
 S_audience = 2300 * S_peraudiencemember;            % area of whole audience
-S_concerthall_wall = 5450;
+S_concerthall_floor = 2000;
+S_concerthall_wall = 5450 - S_concerthall_floor;
 
 
 A_concerthall_wall = abs_wood*S_concerthall_wall;
+A_concerthall_floor = abs_wood*S_concerthall_floor;
 A_absorber = - S_absorber * log(1-abs_absorber);    % eq. absorption area of absorbers
 A_absorber_low = - S_absorber_low * log(1-abs_absorber_low);
 
 A_occ = - S_audience*log(1-abs_occ);                % eq. absorption area of audience
 A_empty = - S_audience*log(1-abs_empty);            % eq. absorption area of seats
 
-A_total_occ = A_concerthall_wall + A_absorber + A_absorber_low +  A_occ; 
-A_total_empty = A_concerthall_wall + A_absorber + A_absorber_low +  A_empty; 
+A_total_occ = A_concerthall_floor + A_concerthall_wall + A_absorber + A_absorber_low +  A_occ; 
+A_total_empty = A_concerthall_floor + A_concerthall_wall + A_absorber + A_absorber_low +  A_empty; 
 
 % reverb time when seated and empty
 T_60_calc_occ = 24*log(10)*V./(c*(4*att_coeff*V + A_total_occ));
@@ -89,8 +94,8 @@ end
 %% rehersal room
 
 % things you should adjust 
-S_absorber_rehersal = 70;
-S_absorber_low_rehersal = 40; 
+S_absorber_rehersal = 80;
+S_absorber_low_rehersal = 30; 
 
 n_person = 1:50;                             % number of people in rehersal room
 V_rehersal = 1470;                       % Volume of rehersal room
@@ -111,72 +116,57 @@ end
 
 %% lobby
 
-V_lobby1 = 6275;
-S_ceiling_L1 = 880;
-S_walls_L1 = 780;
-S_floor_L1 = 1255;
-S_window_L1 = 125;
-S_absorber_L1 = 50;
-S_absorber_low_L1 = 150;
-
-V_lobby2 = 4500;
-S_ceiling_L2 = 1090;
-S_walls_L2 = 680;
-S_floor_L2 = 900;
-S_window_L2 = 125;
-S_absorber_L2 = 50;
-S_absorber_low_L2 = 100;
+V_lobby = 50000;
+S_ceiling_L = 5900;
+S_walls_CH_L = 7000;
+S_floor_L = 3310 - 1762;
+S_window_L = 650;
+S_absorber_L = 1000;
+S_absorber_low_L = 1200;
 
 
-A_ceiling_L1 = S_ceiling_L1*abs_wood;
-A_walls_L1 = S_walls_L1*abs_brick;
-A_floor_L1 = S_floor_L1*abs_stone;
-A_window_L1 = S_window_L1*abs_glass;
-A_absorber_L1 = - S_absorber_L1 * log(1-abs_absorber);
-A_absorber_low_L1 = - S_absorber_low_L1 * log(1-abs_absorber);
-A_total_L1 = A_ceiling_L1 + A_walls_L1 + A_floor_L1 + A_window_L1 + A_absorber_L1 + A_absorber_low_L1;
+A_ceiling_L = S_ceiling_L*abs_wood;
+A_walls_L = S_walls_CH_L*abs_stone;
+A_floor_L = S_floor_L*abs_stone;
+A_window_L = S_window_L*abs_glass;
+A_absorber_L = - S_absorber_L * log(1-abs_absorber_lobby);
+A_absorber_low_L = - S_absorber_low_L * log(1-abs_absorber_low_lobby);
+A_total_L = A_ceiling_L + A_walls_L + A_floor_L + A_window_L + A_absorber_L + A_absorber_low_L;
 
-A_ceiling_L2 = S_ceiling_L2*abs_wood;
-A_walls_L2 = S_walls_L2*abs_brick;
-A_floor_L2 = S_floor_L2*abs_stone;
-A_window_L2 = S_window_L2*abs_glass;
-A_absorber_L2 = - S_absorber_L2 * log(1-abs_absorber);
-A_absorber_low_L2 = - S_absorber_low_L2 * log(1-abs_absorber);
-A_total_L2 = A_ceiling_L2 + A_walls_L2 + A_floor_L2 + A_window_L2 + A_absorber_L2 + A_absorber_low_L2;
 
-T_60_Lobby1 = 24*log(10)*V_lobby1./(c*(4*att_coeff*V_lobby1 + A_total_L1));
-T_60_Lobby2 = 24*log(10)*V_lobby2./(c*(4*att_coeff*V_lobby2 + A_total_L2));
+
+T_60_Lobby = 24*log(10)*V_lobby./(c*(4*att_coeff*V_lobby + A_total_L));
+
 
 %% plots
 
-% % clarity
-% figure
-% plot(r, C_80_occ)
-% hold on
-% thickenall_big;
-% grid on
-% xlabel('Distance r in m')
-% ylabel('Clarity C_{80} in dB')
-% legend('125','250','500','1k','2k','4k')
-% %ylim([-5 20])
-% 
-% % strength
-% figure
-% plot(r, G)
-% thickenall_big;
-% grid on 
-% legend('125','250','500','1k','2k','4k')
-% xlabel('Distance r in m')
-% ylabel('Strength G in dB')
-% xlim([0 40])
-% ylim([-5 20])
+% clarity
+figure
+plot(r, C_80_occ)
+hold on
+thickenall_big;
+grid on
+xlabel('Distance r in m')
+ylabel('Clarity C_{80} in dB')
+legend('125','250','500','1k','2k','4k')
+%ylim([-5 20])
+
+% strength
+figure
+plot(r, G)
+thickenall_big;
+grid on 
+legend('125','250','500','1k','2k','4k')
+xlabel('Distance r in m')
+ylabel('Strength G in dB')
+xlim([0 40])
+ylim([-5 20])
 
 % lobby
 figure
-semilogx(f_oct, T_60_Lobby1)
+semilogx(f_oct, T_60_Lobby)
 hold on
 grid on
-semilogx(f_oct, T_60_Lobby2)
 thickenall_big;
 xticks(f_oct);
 xticklabels({'125', '250', '500', '1k', '2k', '4k'})
