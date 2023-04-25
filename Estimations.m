@@ -1,34 +1,33 @@
 clc
 close all
-clear
+clearvars -except T_max
 
 %% reverb time and absorption of concert hall
 % Mepfit Room  
 % All tables are for the octave bands from 125 Hz to 4 kHz
-f_oct = [125 250 500 1000 2000 4000];
+f_oct = [63 125 250 500 1000 2000 4000];
 c = 340;                                            % speed of sound
 
 %%
 
-abs_occ = [0.62 0.72 0.8 0.83 0.84 0.85];           % absorption coeff seated
-abs_empty = [0.54 0.62 0.68 0.7 0.68 0.66];         % absorption coeff empty
-att_coeff = [0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
+abs_occ = [0.6 0.62 0.72 0.78 0.81 0.84 0.85];        % absorption coeff seated
+abs_empty = [0.5 0.58 0.68 0.74 0.77 0.78 0.80];      % absorption coeff empty
+att_coeff = [0 0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
 
-abs_absorber = [0.7	0.95 0.95 0.95 0.9 0.9];        % absorption coeff of absorber (example)
-abs_absorber_low = [0.75 0.65 0.5 0.2 0.1 0.1];     % absorption coeff of low freq absorber
-abs_wood = [0.15 0.11 0.10 0.07 0.06 0.07];
-abs_glass = [0.18 0.06 0.04 0.05 0.02 0.02];
-abs_brick = [0.03 0.03 0.03 0.04 0.05 0.07];
-abs_stone = [0.01 0.01 0.015 0.02 0.02 0.02];
+abs_absorber = [0.7 0.7	0.95 0.95 0.95 0.9 0.9];      % absorption coeff of absorber (example)
+abs_absorber_low = [0.7 0.75 0.7 0.4 0.2 0.1 0.1];    % absorption coeff of low freq absorber
+abs_wood = [0.18 0.15 0.11 0.10 0.07 0.06 0.07];
+abs_glass = [0.25 0.18 0.06 0.04 0.05 0.02 0.02];
+abs_brick = [0.03 0.03 0.03 0.03 0.04 0.05 0.07];
+abs_stone = [0.01 0.01 0.01 0.015 0.02 0.02 0.02];
 
 %%
 % things you should adjust
 V = 21727;                                          % Volume of concert hall
 S_peraudiencemember = 0.5*0.55;                     % area per seat
-S_absorber = 0;                                   % area of normal absorbers
+S_absorber = 250;                                   % area of normal absorbers
 S_absorber_low = 220;                               % area of low frequency absorbers
 % end
-
 
 S_audience = 2300 * S_peraudiencemember;            % area of whole audience
 S_concerthall_wall = 5850;
@@ -49,7 +48,7 @@ T_60_calc_occ = 24*log(10)*V./(c*(4*att_coeff*V + A_total_occ));
 T_60_calc_empty = 24*log(10)*V./(c*(4*att_coeff*V + A_total_empty));
 
 %% clarity
-r = 1:0.1:50;       % distance
+r = 5:1:50;       % distance
 
 E_direct = zeros(1,length(r));
 E_direct(:) = 100./r.^2;
@@ -102,7 +101,7 @@ S_wall = 538;         % area of the walls, floor and ceiling in rehersal room
 
 A_absorber_rehersal = - S_absorber_rehersal * log(1-abs_absorber);
 A_absorber_rehersal_low = - S_absorber_low_rehersal * log(1-abs_absorber_low);
-A_person = [0.05 0.16 0.25 0.58 0.86 1.03]; % eq. absorption area per person
+A_person = [0.02 0.05 0.16 0.25 0.58 0.86 1.03]; % eq. absorption area per person
 A_wall = S_wall*abs_wood;                   % eq. absorption area of walls
 
 
@@ -157,28 +156,31 @@ S_mepfit = 2*(2.7*25 + 11*23 + 28*16) + 2*(25+23+28)*5;
 A_mepfit = S_mepfit*abs_wood;
 %% plots
 
-% % clarity
-% figure
-% plot(r, C_80_occ)
-% hold on
-% thickenall_big;
-% grid on
-% xlabel('Distance r in m')
-% ylabel('Clarity C_{80} in dB')
-% legend('125','250','500','1k','2k','4k')
-% %ylim([-5 20])
-% 
-% % strength
-% figure
-% plot(r, G)
-% thickenall_big;
-% grid on 
-% legend('125','250','500','1k','2k','4k')
-% xlabel('Distance r in m')
-% ylabel('Strength G in dB')
-% xlim([0 40])
-% ylim([-5 20])
+% clarity
+figure
+plot(r, C_80_occ)
+hold on
+thickenall_big;
+grid on
+xlabel('Distance r in m')
+ylabel('Clarity C_{80} in dB')
+legend('63', '125','250','500','1k','2k','4k')
+xlim([0 35])
+ylim([0 10])
 
+%%
+% strength
+figure
+plot(r, G)
+thickenall_big;
+grid on 
+legend('63', '125','250','500','1k','2k','4k')
+xlabel('Distance r in m')
+ylabel('Strength G in dB')
+xlim([0 35])
+ylim([-5 15])
+
+%%
 % lobby
 figure
 semilogx(f_oct, T_60_Lobby1)
@@ -187,28 +189,32 @@ grid on
 semilogx(f_oct, T_60_Lobby2)
 thickenall_big;
 xticks(f_oct);
-xticklabels({'125', '250', '500', '1k', '2k', '4k'})
-%xlim([0 5000])
+xticklabels({'63','125', '250', '500', '1k', '2k', '4k'})
+xlim([0 5000])
 ylim([0 3])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
 legend('Lobby1','Lobby2')
-
+%%
 % T_60 in concert hall
-figure
-semilogx(f_oct, T_60_calc_empty)
+fig_name = 'T_60_group7';
+f = figure;
+semilogx(f_oct, T_60_calc_empty,'--', color = '[0, 0.4470, 0.7410]')
 hold on
-grid on
-semilogx(f_oct, T_60_calc_occ)
+semilogx(f_oct, T_60_calc_occ, color = '[0, 0.4470, 0.7410]')
+semilogx(f_oct, T_max(1,:),'--', color = '[0.8500 0.3250 0.0980]')
+semilogx(f_oct, T_max(2,:), color = '[0.8500 0.3250 0.0980]')
 thickenall_big;
 xticks(f_oct);
-xticklabels({'125', '250', '500', '1k', '2k', '4k'})
-%xlim([0 5000])
-ylim([0 3])
+xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
+xlim([0 5000])
+ylim([0 2.5])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
-legend('empty','seated')
-
+set(gcf, 'color', 'none');
+%legend('empty','seated')
+exportPlot(f,'Plots/', fig_name, true)
+%%
 % T_60 in rehersal room
 figure
 semilogx(f_oct, T_60_rehersal(1,:))
@@ -218,7 +224,7 @@ semilogx(f_oct, T_60_rehersal(25,:))
 semilogx(f_oct, T_60_rehersal(50,:))
 thickenall_big;
 xticks(f_oct);
-xticklabels({'125', '250', '500', '1k', '2k', '4k'})
+xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
 %xlim([0 5000])
 ylim([0 3])
 xlabel('f in Hz')
