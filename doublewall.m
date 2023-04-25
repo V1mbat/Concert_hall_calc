@@ -31,7 +31,7 @@ temp = zeros(1,length(f));
 for i = 1:length(f)
 
     if f(i)<f_0 && f(i)<f_d
-        temp(i) = 20*log10(2*pi*f(i).*m_total./(2*rho_0*c_0));
+        temp(i) = 20*log10(2*pi*f(i).*m_total./(2*rho_0*c_0)) - 7;
 
     elseif f(i)>=f_0 && f(i)<f_d
         temp(i) = r1(i) + r2(i) + 20*log10(f(i)*d) - 29;
