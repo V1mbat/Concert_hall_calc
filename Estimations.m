@@ -163,10 +163,11 @@ xlim([0 5000])
 ylim([0 2.5])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
+
 %set(gcf, 'color', 'none');
 %legend('empty','seated')
 exportPlot(f,'Plots/', fig_name, true)
-return
+
 %% plots
 
 % clarity
@@ -178,7 +179,8 @@ grid on
 xlabel('Distance r in m')
 ylabel('Clarity C_{80} in dB')
 legend('125','250','500','1k','2k','4k')
-%ylim([-5 20])
+xlim([5 35])
+ylim([-5 20])
 
 % strength
 figure
@@ -188,7 +190,7 @@ grid on
 legend('125','250','500','1k','2k','4k')
 xlabel('Distance r in m')
 ylabel('Strength G in dB')
-xlim([0 40])
+xlim([5 35])
 ylim([-5 20])
 
 % lobby
