@@ -148,15 +148,20 @@ if save_T
     save('T_max.mat','T_max');
     %return;
 end
+%% Plots 
+% adjust colors / add more colors
+col1 = '[0, 0.4470, 0.7410]';
+col2 = '[0.8500 0.3250 0.0980]';
+
 %%
 % T_60 in concert hall
 fig_name = 'T_60_group2';
 f = figure;
-semilogx(f_oct, T_60_calc_empty,'--', color = '[0, 0.4470, 0.7410]')
+semilogx(f_oct, T_60_calc_empty,'--', color = col1)
 hold on
-semilogx(f_oct, T_60_calc_occ, color = '[0, 0.4470, 0.7410]')
-semilogx(f_oct, T_max(1,:),'--', color = '[0.8500 0.3250 0.0980]')
-semilogx(f_oct, T_max(2,:), color = '[0.8500 0.3250 0.0980]')
+semilogx(f_oct, T_60_calc_occ, color = col1)
+semilogx(f_oct, T_max(1,:),'--', color = col2)
+semilogx(f_oct, T_max(2,:), color = col2)
 thickenall_big;
 xticks(f_oct);
 xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
@@ -166,33 +171,28 @@ xlabel('f in Hz')
 ylabel('T_{60} in s')
 
 %set(gcf, 'color', 'none');
-%legend('empty','seated')
+
 exportPlot(f,'Plots/', fig_name, true)
 
 %% plots
 
-% clarity
-figure
-plot(r, C_80_occ)
+% clarity and strength
+fig_name = 'C_80_G_group2';
+f = figure;
+
+plot(r, C_80_occ(4,:), color = col1)
 hold on
+plot(r, G(4,:), color = col2)
 thickenall_big;
 grid on
-xlabel('Distance r in m')
-ylabel('Clarity C_{80} in dB')
-legend('125','250','500','1k','2k','4k')
+xlabel('Distance in m')
+ylabel('C_{80}/G in dB')
+%legend('Clarity C_{80}','Strength G')
 xlim([5 35])
-ylim([-5 20])
+ylim([-2 10])
+exportPlot(f,'Plots/', fig_name, true)
 
-% strength
-figure
-plot(r, G)
-thickenall_big;
-grid on 
-legend('125','250','500','1k','2k','4k')
-xlabel('Distance r in m')
-ylabel('Strength G in dB')
-xlim([5 35])
-ylim([-5 20])
+return;
 
 % lobby
 figure
@@ -201,12 +201,12 @@ hold on
 grid on
 thickenall_big;
 xticks(f_oct);
-xticklabels({'125', '250', '500', '1k', '2k', '4k'})
+xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
 %xlim([0 5000])
 ylim([0 3])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
-legend('Lobby1','Lobby2')
+legend('Lobby')
 
 % T_60 in rehersal room
 figure
@@ -217,7 +217,7 @@ semilogx(f_oct, T_60_rehersal(25,:))
 semilogx(f_oct, T_60_rehersal(50,:))
 thickenall_big;
 xticks(f_oct);
-xticklabels({'125', '250', '500', '1k', '2k', '4k'})
+xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
 %xlim([0 5000])
 ylim([0 3])
 xlabel('f in Hz')
