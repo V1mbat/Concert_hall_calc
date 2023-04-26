@@ -1,7 +1,7 @@
 clc
 close all
 clear
-save_T = true;
+save_T = false;
 %% reverb time and absorption of concert hall
 % Mepfit Room  
 % All tables are for the octave bands from 63 Hz to 4 kHz
@@ -141,7 +141,31 @@ A_total_L = A_ceiling_L + A_walls_L + A_floor_L + A_window_L + A_absorber_L + A_
 
 T_60_Lobby = 24*log(10)*V_lobby./(c*(4*att_coeff*V_lobby + A_total_L));
 
-
+%%
+if save_T
+    T_max = [T_60_calc_empty; T_60_calc_occ];
+    save('T_max.mat','T_max');
+    return
+end
+%%
+% T_60 in concert hall
+fig_name = 'T_60_group2';
+f = figure;
+semilogx(f_oct, T_60_calc_empty,'--', color = '[0, 0.4470, 0.7410]')
+hold on
+semilogx(f_oct, T_60_calc_occ, color = '[0, 0.4470, 0.7410]')
+semilogx(f_oct, T_max(1,:),'--', color = '[0.8500 0.3250 0.0980]')
+semilogx(f_oct, T_max(2,:), color = '[0.8500 0.3250 0.0980]')
+thickenall_big;
+xticks(f_oct);
+xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
+xlim([0 5000])
+ylim([0 2.5])
+xlabel('f in Hz')
+ylabel('T_{60} in s')
+%set(gcf, 'color', 'none');
+%legend('empty','seated')
+exportPlot(f,'Plots/', fig_name, true)
 %% plots
 
 % clarity
