@@ -1,12 +1,16 @@
 clc
 close all
 clear
-
+save_T = true;
 %% reverb time and absorption of concert hall
-% All tables are for the octave bands from 125 Hz to 4 kHz
-f_oct = [125 250 500 1000 2000 4000];
+% Mepfit Room  
+% All tables are for the octave bands from 63 Hz to 4 kHz
+f_oct = [63 125 250 500 1000 2000 4000];
 c = 340;                                            % speed of sound
 
+if save_T == false
+    load T_max.mat;
+end
 %%
 abs_occ = [0.62 0.72 0.8 0.83 0.84 0.85];           % absorption coeff seated
 abs_empty = [0.54 0.62 0.68 0.7 0.68 0.66];         % absorption coeff empty
