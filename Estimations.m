@@ -150,18 +150,18 @@ if save_T
 end
 %% Plots 
 % adjust colors / add more colors
-col1 = '[0, 0.4470, 0.7410]';
-col2 = '[0.8500 0.3250 0.0980]';
+col1 = [0, 0.4470, 0.7410];
+col2 = [0.8500 0.3250 0.0980];
 
 %%
 % T_60 in concert hall
 fig_name = 'T_60_group2';
 f = figure;
-semilogx(f_oct, T_60_calc_empty,'--', color = col1)
+semilogx(f_oct, T_60_calc_empty,'--', 'Color', col1)
 hold on
-semilogx(f_oct, T_60_calc_occ, color = col1)
-semilogx(f_oct, T_max(1,:),'--', color = col2)
-semilogx(f_oct, T_max(2,:), color = col2)
+semilogx(f_oct, T_60_calc_occ, 'Color', col1)
+semilogx(f_oct, T_max(1,:),'--', 'Color', col2)
+semilogx(f_oct, T_max(2,:), 'Color', col2)
 thickenall_big;
 xticks(f_oct);
 xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
@@ -180,9 +180,9 @@ exportPlot(f,'Plots/', fig_name, true)
 fig_name = 'C_80_G_group2';
 f = figure;
 
-plot(r, C_80_occ(4,:), color = col1)
+plot(r, C_80_occ(4,:), 'Color', col1)
 hold on
-plot(r, G(4,:), color = col2)
+plot(r, G(4,:), 'Color', col2)
 thickenall_big;
 grid on
 xlabel('Distance in m')
