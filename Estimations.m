@@ -7,18 +7,18 @@ save_T = false;
 % Mepfit Room  
 % All tables are for the octave bands from 63 Hz to 4 kHz
 f_oct = [63 125 250 500 1000 2000 4000];
-c = 340;                                            % speed of sound
+c = 340;                                                % speed of sound
 
 if save_T == false
     load T_max.mat;
 end
 %%
 
-abs_occ = [0.6 0.62 0.74 0.78 0.82 0.84 0.85];        % absorption coeff seated
-abs_empty = [0.54 0.58 0.70 0.74 0.78 0.8 0.80];      % absorption coeff empty
-att_coeff = [0 0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
+abs_occ = [0.6 0.62 0.74 0.78 0.82 0.84 0.85];          % absorption coeff seated
+abs_empty = [0.54 0.58 0.70 0.74 0.78 0.8 0.80];        % absorption coeff empty
+att_coeff = [0 0 0 0.001 0.002 0.004 0.0086];           % attanuation coeff
 
-abs_absorber = [0.7 0.8	0.90 0.95 0.96 0.9 0.9];      % absorption coeff of absorber (example)
+abs_absorber = [0.7 0.8	0.90 0.95 0.96 0.9 0.9];        % absorption coeff of absorber (example)
 abs_absorber_low = [0.7 0.75 0.85 0.45 0.2 0.1 0.1];    % absorption coeff of low freq absorber
 abs_wood = [0.15 0.15 0.11 0.10 0.07 0.06 0.07];
 abs_glass = [0.2 0.18 0.06 0.04 0.05 0.02 0.02];
@@ -27,10 +27,10 @@ abs_stone = [0.01 0.01 0.01 0.015 0.02 0.02 0.02];
 
 %%
 % things you should adjust
-V = 21000;                                          % Volume of concert hall
-S_peraudiencemember = 0.5*0.55;                     % area per seat
-S_absorber = 200;                                   % area of normal absorbers
-S_absorber_low = 130;                               % area of low frequency absorbers
+V = 21000;                                              % Volume of concert hall
+S_peraudiencemember = 0.5*0.55;                         % area per seat
+S_absorber = 200;                                       % area of normal absorbers
+S_absorber_low = 130;                                   % area of low frequency absorbers
 
 % 0/100 for high T_60
 % 200/130 for low T_60
@@ -170,7 +170,7 @@ end
 %% Plots 
 % adjust colors / add more colors
 col1 = [0, 0.4470, 0.7410];
-col2 = '[0.8500 0.3250 0.0980]';
+col2 = [0.8500 0.3250 0.0980];
 
 %%
 % T_60 in concert hall
