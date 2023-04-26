@@ -15,10 +15,10 @@ end
 %%
 
 abs_occ = [0.6 0.62 0.72 0.76 0.81 0.84 0.85];        % absorption coeff seated
-abs_empty = [0.5 0.58 0.68 0.74 0.77 0.78 0.80];      % absorption coeff empty
+abs_empty = [0.5 0.58 0.68 0.72 0.77 0.78 0.80];      % absorption coeff empty
 att_coeff = [0 0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
 
-abs_absorber = [0.7 0.7	0.90 0.90 0.90 0.9 0.9];      % absorption coeff of absorber (example)
+abs_absorber = [0.7 0.7	0.90 0.90 0.9 0.9 0.9];      % absorption coeff of absorber (example)
 abs_absorber_low = [0.7 0.75 0.7 0.4 0.2 0.1 0.1];    % absorption coeff of low freq absorber
 abs_absorber_lobby = [0.7 0.7 0.95 0.95 0.95 0.95 0.9];        % absorption coeff of absorber (example)
 abs_absorber_low_lobby = [0.7 0.85 0.65 0.5 0.2 0.1 0.1];     % absorption coeff of low freq absorber
@@ -31,7 +31,7 @@ abs_stone = [0.01 0.01 0.01 0.015 0.02 0.02 0.02];
 % things you should adjust
 V = 19400;                                          % Volume of concert hall
 S_peraudiencemember = 0.5*0.5;                     % area per seat
-S_absorber = 20;                                   % area of normal absorbers
+S_absorber = 250;                                   % area of normal absorbers
 S_absorber_low = 135;                               % area of low frequency absorbers
 % end
 
@@ -166,6 +166,7 @@ ylabel('T_{60} in s')
 %set(gcf, 'color', 'none');
 %legend('empty','seated')
 exportPlot(f,'Plots/', fig_name, true)
+return
 %% plots
 
 % clarity
@@ -203,21 +204,6 @@ ylim([0 3])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
 legend('Lobby1','Lobby2')
-
-% T_60 in concert hall
-figure
-semilogx(f_oct, T_60_calc_empty)
-hold on
-grid on
-semilogx(f_oct, T_60_calc_occ)
-thickenall_big;
-xticks(f_oct);
-xticklabels({'125', '250', '500', '1k', '2k', '4k'})
-%xlim([0 5000])
-ylim([0 3])
-xlabel('f in Hz')
-ylabel('T_{60} in s')
-legend('empty','seated')
 
 % T_60 in rehersal room
 figure
