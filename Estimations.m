@@ -15,25 +15,26 @@ end
 %%
 
 abs_occ = [0.6 0.62 0.72 0.76 0.81 0.84 0.85];        % absorption coeff seated
-abs_empty = [0.5 0.58 0.68 0.72 0.77 0.78 0.80];      % absorption coeff empty
+abs_empty = [0.54 0.58 0.68 0.72 0.77 0.78 0.80];      % absorption coeff empty
 att_coeff = [0 0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
 
-abs_absorber = [0.7 0.7	0.90 0.90 0.9 0.9 0.9];      % absorption coeff of absorber (example)
-abs_absorber_low = [0.7 0.75 0.7 0.4 0.2 0.1 0.1];    % absorption coeff of low freq absorber
+abs_absorber = [0.7 0.7	0.80 0.88 0.9 0.9 0.9];      % absorption coeff of absorber (example)
+abs_absorber_low = [0.7 0.65 0.75 0.4 0.2 0.1 0.1];    % absorption coeff of low freq absorber
 abs_absorber_lobby = [0.7 0.7 0.95 0.95 0.95 0.95 0.9];        % absorption coeff of absorber (example)
 abs_absorber_low_lobby = [0.7 0.85 0.65 0.5 0.2 0.1 0.1];     % absorption coeff of low freq absorber
 
-abs_wood = [0.18 0.15 0.11 0.10 0.07 0.06 0.07];
-abs_glass = [0.25 0.18 0.06 0.04 0.05 0.02 0.02];
+abs_wood = [0.15 0.15 0.11 0.10 0.07 0.06 0.07];
+abs_glass = [0.20 0.18 0.06 0.04 0.05 0.02 0.02];
 abs_brick = [0.03 0.03 0.03 0.03 0.04 0.05 0.07];
 abs_stone = [0.01 0.01 0.01 0.015 0.02 0.02 0.02];
 %%
 % things you should adjust
 V = 19400;                                          % Volume of concert hall
 S_peraudiencemember = 0.5*0.5;                     % area per seat
-S_absorber = 250;                                   % area of normal absorbers
-S_absorber_low = 135;                               % area of low frequency absorbers
-% end
+S_absorber = 280;                                   % area of normal absorbers
+S_absorber_low = 160;                               % area of low frequency absorbers
+% 0/90 for high T_60
+% 280/160 for low T_60
 
 S_audience = 2300 * S_peraudiencemember;            % area of whole audience
 S_concerthall_floor = 2000;
@@ -145,7 +146,7 @@ T_60_Lobby = 24*log(10)*V_lobby./(c*(4*att_coeff*V_lobby + A_total_L));
 if save_T
     T_max = [T_60_calc_empty; T_60_calc_occ];
     save('T_max.mat','T_max');
-    return
+    %return;
 end
 %%
 % T_60 in concert hall
