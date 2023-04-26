@@ -14,12 +14,12 @@ if save_T == false
 end
 %%
 
-abs_occ = [0.6 0.62 0.72 0.78 0.81 0.84 0.85];        % absorption coeff seated
-abs_empty = [0.54 0.58 0.68 0.74 0.77 0.78 0.80];      % absorption coeff empty
+abs_occ = [0.6 0.62 0.74 0.78 0.82 0.84 0.85];        % absorption coeff seated
+abs_empty = [0.54 0.58 0.70 0.74 0.78 0.8 0.80];      % absorption coeff empty
 att_coeff = [0 0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
 
-abs_absorber = [0.7 0.7	0.95 0.95 0.95 0.9 0.9];      % absorption coeff of absorber (example)
-abs_absorber_low = [0.7 0.75 0.85 0.4 0.2 0.1 0.1];    % absorption coeff of low freq absorber
+abs_absorber = [0.7 0.8	0.90 0.95 0.96 0.9 0.9];      % absorption coeff of absorber (example)
+abs_absorber_low = [0.7 0.75 0.85 0.45 0.2 0.1 0.1];    % absorption coeff of low freq absorber
 abs_wood = [0.15 0.15 0.11 0.10 0.07 0.06 0.07];
 abs_glass = [0.2 0.18 0.06 0.04 0.05 0.02 0.02];
 abs_brick = [0.03 0.03 0.03 0.03 0.04 0.05 0.07];
@@ -165,7 +165,7 @@ A_mepfit = S_mepfit*abs_wood;
 if save_T
     T_max = [T_60_calc_empty; T_60_calc_occ];
     save('T_max.mat','T_max');
-    return;
+    %return;
 end
 %% Plots 
 % adjust colors / add more colors
@@ -174,7 +174,7 @@ col2 = '[0.8500 0.3250 0.0980]';
 
 %%
 % T_60 in concert hall
-fig_name = 'T_60_group2';
+fig_name = 'T_60_group7';
 f = figure;
 semilogx(f_oct, T_60_calc_empty,'--', color = col1)
 hold on
@@ -196,7 +196,7 @@ exportPlot(f,'Plots/', fig_name, true)
 %% 
 
 % clarity and strength
-fig_name = 'C_80_G_group2';
+fig_name = 'C_80_G_group7';
 f = figure;
 
 plot(r, C_80_occ(4,:), color = col1)
