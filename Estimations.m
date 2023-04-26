@@ -1,7 +1,8 @@
 clc
 close all
 clear
-save_T = false;
+
+save_T = true;
 %% reverb time and absorption of concert hall
 % Mepfit Room  
 % All tables are for the octave bands from 63 Hz to 4 kHz
@@ -12,20 +13,20 @@ if save_T == false
     load T_max.mat;
 end
 %%
+
 abs_occ = [0.62 0.72 0.8 0.83 0.84 0.85];           % absorption coeff seated
 abs_empty = [0.54 0.62 0.68 0.7 0.68 0.66];         % absorption coeff empty
 att_coeff = [0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
 
-abs_absorber = [0.7	0.95 0.95 0.95 0.9 0.9];        % absorption coeff of absorber (example)
-abs_absorber_lobby = [0.7 0.95 0.95 0.95 0.95 0.9];        % absorption coeff of absorber (example)
-abs_absorber_low = [0.7 0.75 0.35 0.2 0.1 0.1];     % absorption coeff of low freq absorber
-abs_absorber_low_lobby = [0.85 0.65 0.5 0.2 0.1 0.1];     % absorption coeff of low freq absorber
+abs_absorber = [0.7 0.7	0.95 0.95 0.95 0.9 0.9];      % absorption coeff of absorber (example)
+abs_absorber_low = [0.7 0.75 0.7 0.4 0.2 0.1 0.1];    % absorption coeff of low freq absorber
+abs_absorber_lobby = [0.7 0.7 0.95 0.95 0.95 0.95 0.9];        % absorption coeff of absorber (example)
+abs_absorber_low_lobby = [0.7 0.85 0.65 0.5 0.2 0.1 0.1];     % absorption coeff of low freq absorber
 
-abs_wood = [0.15 0.11 0.10 0.07 0.06 0.07];
-abs_glass = [0.18 0.06 0.04 0.05 0.02 0.02];
-abs_brick = [0.03 0.03 0.03 0.04 0.05 0.07];
-abs_stone = [0.01 0.01 0.015 0.02 0.02 0.02];
-
+abs_wood = [0.18 0.15 0.11 0.10 0.07 0.06 0.07];
+abs_glass = [0.25 0.18 0.06 0.04 0.05 0.02 0.02];
+abs_brick = [0.03 0.03 0.03 0.03 0.04 0.05 0.07];
+abs_stone = [0.01 0.01 0.01 0.015 0.02 0.02 0.02];
 %%
 % things you should adjust
 V = 19400;                                          % Volume of concert hall
@@ -108,7 +109,7 @@ S_wall = 400 + 245 + 245;         % area of the walls, floor and ceiling in rehe
 
 A_absorber_rehersal = - S_absorber_rehersal * log(1-abs_absorber);
 A_absorber_rehersal_low = - S_absorber_low_rehersal * log(1-abs_absorber_low);
-A_person = [0.05 0.16 0.25 0.58 0.86 1.03]; % eq. absorption area per person
+A_person = [0.02 0.05 0.16 0.25 0.58 0.86 1.03]; % eq. absorption area per person
 A_wall = S_wall*abs_wood;                   % eq. absorption area of walls
 
 
@@ -136,7 +137,6 @@ A_window_L = S_window_L*abs_glass;
 A_absorber_L = - S_absorber_L * log(1-abs_absorber_lobby);
 A_absorber_low_L = - S_absorber_low_L * log(1-abs_absorber_low_lobby);
 A_total_L = A_ceiling_L + A_walls_L + A_floor_L + A_window_L + A_absorber_L + A_absorber_low_L;
-
 
 
 T_60_Lobby = 24*log(10)*V_lobby./(c*(4*att_coeff*V_lobby + A_total_L));
