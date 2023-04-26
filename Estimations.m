@@ -2,7 +2,7 @@ clc
 close all
 clear
 
-save_T = true;
+save_T = false;
 %% reverb time and absorption of concert hall
 % Mepfit Room  
 % All tables are for the octave bands from 63 Hz to 4 kHz
@@ -14,11 +14,11 @@ if save_T == false
 end
 %%
 
-abs_occ = [0.62 0.72 0.8 0.83 0.84 0.85];           % absorption coeff seated
-abs_empty = [0.54 0.62 0.68 0.7 0.68 0.66];         % absorption coeff empty
-att_coeff = [0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
+abs_occ = [0.6 0.62 0.72 0.76 0.81 0.84 0.85];        % absorption coeff seated
+abs_empty = [0.5 0.58 0.68 0.74 0.77 0.78 0.80];      % absorption coeff empty
+att_coeff = [0 0 0 0.001 0.002 0.004 0.0086];         % attanuation coeff
 
-abs_absorber = [0.7 0.7	0.95 0.95 0.95 0.9 0.9];      % absorption coeff of absorber (example)
+abs_absorber = [0.7 0.7	0.90 0.90 0.90 0.9 0.9];      % absorption coeff of absorber (example)
 abs_absorber_low = [0.7 0.75 0.7 0.4 0.2 0.1 0.1];    % absorption coeff of low freq absorber
 abs_absorber_lobby = [0.7 0.7 0.95 0.95 0.95 0.95 0.9];        % absorption coeff of absorber (example)
 abs_absorber_low_lobby = [0.7 0.85 0.65 0.5 0.2 0.1 0.1];     % absorption coeff of low freq absorber
@@ -31,7 +31,7 @@ abs_stone = [0.01 0.01 0.01 0.015 0.02 0.02 0.02];
 % things you should adjust
 V = 19400;                                          % Volume of concert hall
 S_peraudiencemember = 0.5*0.5;                     % area per seat
-S_absorber = 200;                                   % area of normal absorbers
+S_absorber = 20;                                   % area of normal absorbers
 S_absorber_low = 135;                               % area of low frequency absorbers
 % end
 
