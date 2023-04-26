@@ -1,13 +1,17 @@
 clc
 close all
-clearvars -except T_max
+clear
 
+save_T = false;
 %% reverb time and absorption of concert hall
 % Mepfit Room  
-% All tables are for the octave bands from 125 Hz to 4 kHz
+% All tables are for the octave bands from 63 Hz to 4 kHz
 f_oct = [63 125 250 500 1000 2000 4000];
 c = 340;                                            % speed of sound
 
+if save_T == false
+    load T_max.mat;
+end
 %%
 
 abs_occ = [0.6 0.62 0.72 0.78 0.81 0.84 0.85];        % absorption coeff seated
@@ -25,8 +29,8 @@ abs_stone = [0.01 0.01 0.01 0.015 0.02 0.02 0.02];
 % things you should adjust
 V = 21727;                                          % Volume of concert hall
 S_peraudiencemember = 0.5*0.55;                     % area per seat
-S_absorber = 250;                                   % area of normal absorbers
-S_absorber_low = 220;                               % area of low frequency absorbers
+S_absorber = 200;                                   % area of normal absorbers
+S_absorber_low = 200;                               % area of low frequency absorbers
 % end
 
 S_audience = 2300 * S_peraudiencemember;            % area of whole audience
@@ -195,6 +199,13 @@ ylim([0 3])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
 legend('Lobby1','Lobby2')
+
+%%
+if save_T
+    T_max = [T_60_calc_empty; T_60_calc_occ];
+    save('T_max.mat','T_max');
+    return
+end
 %%
 % T_60 in concert hall
 fig_name = 'T_60_group7';
@@ -211,7 +222,7 @@ xlim([0 5000])
 ylim([0 2.5])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
-set(gcf, 'color', 'none');
+%set(gcf, 'color', 'none');
 %legend('empty','seated')
 exportPlot(f,'Plots/', fig_name, true)
 %%
