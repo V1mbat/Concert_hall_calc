@@ -171,6 +171,8 @@ ylim([0 2.5])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
 set(gca,'fontname','times')
+set(gcf, 'color', 'none')
+set(gca, 'color', 'none')
 
 %set(gcf, 'color', 'none');
 
@@ -193,6 +195,8 @@ ylabel('C_{80}/G in dB')
 xlim([5 35])
 ylim([-2 10])
 set(gca,'fontname','times')
+set(gcf, 'color', 'none')
+set(gca, 'color', 'none')
 exportPlot(f,'Plots/', fig_name, true)
 
 % % lobby
@@ -226,5 +230,7 @@ ylim([0 1.5])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
 set(gca,'fontname','times')
+set(gcf, 'color', 'none')
+set(gca, 'color', 'none')
 %legend('1 Musician','50 Musicians', '100 Musicians')
 exportPlot(f,'Plots/', fig_name, true)
