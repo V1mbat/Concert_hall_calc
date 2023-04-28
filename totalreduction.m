@@ -82,8 +82,8 @@ r4_single = singlewall(f,wall4);
 % double wall consisting of wall 3 and wall 4
 % adjust S_12 and S_34 for the areas of the partitions
 
-S_12 = 3000;        % area of the double wall made out of wall 1 and wall 2
-S_34 = 150;         % area of the double wall made out of wall 3 and wall 4
+S_12 = 5450;        % area of the double wall made out of wall 1 and wall 2
+S_34 = 0;         % area of the double wall made out of wall 3 and wall 4
 
 r_glass = r_doubleglass;
 r_comb = 10*log10((S_12+S_34)./(S_12*10.^(-r12_double/10) + S_34*10.^(-r_glass/10)));
