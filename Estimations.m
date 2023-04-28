@@ -103,7 +103,7 @@ end
 S_absorber_rehersal = 80;
 S_absorber_low_rehersal = 30; 
 
-n_person = 1:50;                             % number of people in rehersal room
+n_person = 1:100;                             % number of people in rehersal room
 V_rehersal = 1470;                       % Volume of rehersal room
 S_wall = 400 + 245 + 245;         % area of the walls, floor and ceiling in rehersal room
 % end
@@ -152,6 +152,7 @@ end
 % adjust colors / add more colors
 col1 = [0, 0.4470, 0.7410];
 col2 = [0.8500 0.3250 0.0980];
+col3 = [1 1 0];
 
 %%
 % T_60 in concert hall
@@ -194,34 +195,36 @@ ylim([-2 10])
 set(gca,'fontname','times')
 exportPlot(f,'Plots/', fig_name, true)
 
-return;
-
-% lobby
-figure
-semilogx(f_oct, T_60_Lobby)
-hold on
-grid on
-thickenall_big;
-xticks(f_oct);
-xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
-%xlim([0 5000])
-ylim([0 3])
-xlabel('f in Hz')
-ylabel('T_{60} in s')
-legend('Lobby')
+% % lobby
+% figure
+% semilogx(f_oct, T_60_Lobby)
+% hold on
+% grid on
+% thickenall_big;
+% xticks(f_oct);
+% xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
+% %xlim([0 5000])
+% ylim([0 3])
+% xlabel('f in Hz')
+% ylabel('T_{60} in s')
+% legend('Lobby')
 
 % T_60 in rehersal room
-figure
-semilogx(f_oct, T_60_rehersal(1,:))
+fig_name = 'T_60_Rehersal_group2';
+
+f = figure;
+semilogx(f_oct, T_60_rehersal(1,:), 'Color', col1)
 hold on
 grid on
-semilogx(f_oct, T_60_rehersal(25,:))
-semilogx(f_oct, T_60_rehersal(50,:))
+semilogx(f_oct, T_60_rehersal(50,:), 'Color', col2)
+semilogx(f_oct, T_60_rehersal(100,:), 'Color', col3)
 thickenall_big;
 xticks(f_oct);
 xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
-%xlim([0 5000])
-ylim([0 3])
+xlim([0 5000])
+ylim([0 1.5])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
-legend('1 Musician','25 Musicians', '50 Musicians')
+set(gca,'fontname','times')
+%legend('1 Musician','50 Musicians', '100 Musicians')
+exportPlot(f,'Plots/', fig_name, true)
