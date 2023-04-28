@@ -3,12 +3,12 @@ close all
 clc
 
 %%
-L_facade = [73 75 80 66 54 50]; % SPL at facade
-NC_15 = [36 29 22 17 14 12];
-NC_20 = [40	33 26 22 19	17];    % noise requirement in concert hall
-NC_40 = [56 50 45 41 39 38];
+L_facade = [71 73 75 80 66 54 50]; % SPL at facade
+NC_15 = [47 36 29 22 17 14 12];
+NC_20 = [51 40	33 26 22 19	17];   
+NC_40 = [64 56 50 45 41 39 38];
 
-f_c = 10^3 * (2.^((-3:2)));
+f_c = 10^3 * (2.^((-4:2)));
 
 c_0 = 340;                      % speed of sound
 rho_0 = 1.2;                    % density air 
@@ -85,6 +85,8 @@ r4_single = singlewall(f,wall4);
 S_12 = 5450;        % area of the double wall made out of wall 1 and wall 2
 S_34 = 0;         % area of the double wall made out of wall 3 and wall 4
 
+r12_double = [32   45   54   66  57  49  47];
+
 r_glass = r_doubleglass;
 r_comb = 10*log10((S_12+S_34)./(S_12*10.^(-r12_double/10) + S_34*10.^(-r_glass/10)));
 r_test = r1_single + r2_single;
@@ -109,19 +111,13 @@ figure
 semilogx(f_c, L_hall)
 hold on
 grid on 
-semilogx(f_c, NC_20)
+semilogx(f_c, NC_15)
 %semilogx(f, r3_single)
 %semilogx(f, r4_single)
 thickenall_big
 xlabel('f in Hz')
 ylabel('L_{SPL} in dB')
 legend('L_{hall}','NC_{20}', 'r glass 1', 'r glass 2','NumColumns',2)
-xlim([100 5000])
+xlim([30 5000])
 ylim([-20 50])
 legend(Location='southoutside')
-
-figure
-semilogx(f_c, r_comb)
-legend('combined reduction index')
-grid on
-thickenall_big
