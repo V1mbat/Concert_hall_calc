@@ -4,6 +4,7 @@ clc
 
 %%
 L_facade = [73 75 80 66 54 50]; % SPL at facade
+NC_15 = [36 29 22 17 14 12];
 NC_20 = [40	33 26 22 19	17];    % noise requirement in concert hall
 NC_40 = [56 50 45 41 39 38];
 
