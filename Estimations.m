@@ -169,6 +169,7 @@ xlim([0 5000])
 ylim([0 2.5])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
+set(gca,'fontname','times')
 
 %set(gcf, 'color', 'none');
 
@@ -190,6 +191,7 @@ ylabel('C_{80}/G in dB')
 %legend('Clarity C_{80}','Strength G')
 xlim([5 35])
 ylim([-2 10])
+set(gca,'fontname','times')
 exportPlot(f,'Plots/', fig_name, true)
 
 return;
