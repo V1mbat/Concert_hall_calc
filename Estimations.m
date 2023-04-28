@@ -175,7 +175,7 @@ col3 = [1 1 0];
 
 %%
 % T_60 in concert hall
-fig_name = 'T_60_group2';
+fig_name = 'T_60_group7';
 f = figure;
 semilogx(f_oct, T_60_calc_empty,'--', 'Color', col1)
 hold on
@@ -190,6 +190,8 @@ ylim([0 2.5])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
 set(gca,'fontname','times')
+set(gcf, 'color', 'none')
+set(gca, 'color', 'none')
 
 %set(gcf, 'color', 'none');
 
@@ -198,7 +200,7 @@ exportPlot(f,'Plots/', fig_name, true)
 %% plots
 
 % clarity and strength
-fig_name = 'C_80_G_group2';
+fig_name = 'C_80_G_group7';
 f = figure;
 
 plot(r, C_80_occ(4,:), 'Color', col1)
@@ -212,7 +214,10 @@ ylabel('C_{80}/G in dB')
 xlim([5 35])
 ylim([-2 10])
 set(gca,'fontname','times')
+set(gcf, 'color', 'none')
+set(gca, 'color', 'none')
 exportPlot(f,'Plots/', fig_name, true)
+
 
 % % lobby
 % figure
@@ -229,22 +234,22 @@ exportPlot(f,'Plots/', fig_name, true)
 % legend('Lobby')
 
 % T_60 in rehersal room
-fig_name = 'T_60_Rehersal_group2';
-
-f = figure;
-semilogx(f_oct, T_60_rehersal(1,:), 'Color', col1)
-hold on
-grid on
-semilogx(f_oct, T_60_rehersal(50,:), 'Color', col2)
-semilogx(f_oct, T_60_rehersal(100,:), 'Color', col3)
-thickenall_big;
-xticks(f_oct);
-xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
-xlim([0 5000])
-ylim([0 1.5])
-xlabel('f in Hz')
-ylabel('T_{60} in s')
-set(gca,'fontname','times')
-%legend('1 Musician','50 Musicians', '100 Musicians')
-exportPlot(f,'Plots/', fig_name, true)
+% fig_name = 'T_60_Rehersal_group7';
+% 
+% f = figure;
+% semilogx(f_oct, T_60_rehersal(1,:), 'Color', col1)
+% hold on
+% grid on
+% semilogx(f_oct, T_60_rehersal(50,:), 'Color', col2)
+% semilogx(f_oct, T_60_rehersal(100,:), 'Color', col3)
+% thickenall_big;
+% xticks(f_oct);
+% xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
+% xlim([0 5000])
+% ylim([0 1.5])
+% xlabel('f in Hz')
+% ylabel('T_{60} in s')
+% set(gca,'fontname','times')
+% %legend('1 Musician','50 Musicians', '100 Musicians')
+% exportPlot(f,'Plots/', fig_name, true)
 
