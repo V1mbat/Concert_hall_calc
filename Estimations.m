@@ -100,9 +100,9 @@ end
 S_absorber_rehersal = 70;
 S_absorber_low_rehersal = 20; 
 
-n_person = 1:100;                             % number of people in rehersal room
-V_rehersal = 1190;                       % Volume of rehersal room
-S_wall = 538;         % area of the walls, floor and ceiling in rehersal room
+n_person = 1:100;                           % number of people in rehersal room
+V_rehersal = 1190;  %ca.20x12x5             % Volume of rehersal room
+S_wall = 538;                               % area of the walls, floor and ceiling in rehersal room
 % end
 
 A_absorber_rehersal = - S_absorber_rehersal * log(1-abs_absorber);
@@ -116,7 +116,36 @@ T_60_rehersal = zeros(length(n_person), length(A_wall));
 for i = n_person
     T_60_rehersal(i,:) = 0.163*V_rehersal./(n_person(i)*A_person + A_wall + A_absorber_rehersal_low + A_absorber_rehersal);
 end
+r_rehersal = 1:0.1:10;
 
+E_direct_rehersal = zeros(1,length(r_rehersal));
+E_direct_rehersal(:) = 100./r_rehersal.^2;
+
+E_early_rehersal = zeros(length(T_60_rehersal), length(r_rehersal));
+E_late_rehersal = zeros(length(T_60_rehersal), length(r_rehersal));
+C_80_rehersal = zeros(length(T_60_rehersal), length(r_rehersal));     % clarity when emtpy
+
+
+for i = 1:length(T_60_rehersal)
+
+    E_early_rehersal(i,:) = (31200*T_60_rehersal(i)/V)*exp(-0.04.*r_rehersal./T_60_rehersal(i))*(1-exp(-1.11/T_60_rehersal(i)));
+    E_late_rehersal(i,:) = (31200*T_60_rehersal(i)/V)*exp(-0.04.*r_rehersal./T_60_rehersal(i))*exp(-1.11/T_60_rehersal(i));
+    C_80_rehersal(i,:) = 10*log10((E_direct_rehersal+E_early_rehersal(i,:))./E_late_rehersal(i,:));
+end
+
+A_rehersal = 0.163*V_rehersal./T_60_rehersal;
+Q = 1;                                  % directivity
+delta = 6.91./T_60_rehersal;          % decay
+ref = Q/(4*pi*10^2);                    % reference
+dir = Q./(4*pi*r_rehersal.^2);                   % direct component
+
+diff = zeros(length(A_rehersal), length(r_rehersal));     % diffuse component
+G_rehersal = zeros(length(A_rehersal), length(r_rehersal));
+
+for i = 1:length(A_rehersal)
+    diff(i,:) = 4./A_rehersal(i) * exp(-2*delta(i)*r_rehersal./c);
+    G_rehersal(i,:) = 10*log10((dir + diff(i,:))./ref);  % Strength for all six octave bands
+end
 %% lobby
 
 V_lobby1 = 6275;
@@ -190,8 +219,8 @@ ylim([0 2.5])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
 set(gca,'fontname','times')
-set(gcf, 'color', 'none')
-set(gca, 'color', 'none')
+%set(gcf, 'color', 'none')
+%set(gca, 'color', 'none')
 
 %set(gcf, 'color', 'none');
 
@@ -214,9 +243,25 @@ ylabel('C_{80}/G in dB')
 xlim([5 35])
 ylim([-2 10])
 set(gca,'fontname','times')
-set(gcf, 'color', 'none')
-set(gca, 'color', 'none')
+%set(gcf, 'color', 'none')
+%set(gca, 'color', 'none')
 exportPlot(f,'Plots/', fig_name, true)
+
+figure
+plot(r_rehersal, C_80_rehersal(4,:), 'Color', col1)
+hold on
+plot(r_rehersal, G_rehersal(4,:), 'Color', col2)
+thickenall_big;
+grid on
+xlabel('Distance in m')
+ylabel('C_{80}/G in dB')
+legend('Clarity C_{80}','Strength G')
+xlim([1 10])
+ylim([5 20])
+set(gca,'fontname','times')
+%set(gcf, 'color', 'none')
+%set(gca, 'color', 'none')
+%exportPlot(f,'Plots/', fig_name, true)
 
 
 % % lobby
