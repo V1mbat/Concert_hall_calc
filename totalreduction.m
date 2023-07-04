@@ -33,48 +33,74 @@ wall2.E = 10E9;                 % young's modulus wall 2
 wall2.nu = 0.3;                 % poisson ratio wall 2
 
 % glass 1
-wall3.rho = 2500;               % density wall 3
-wall3.t = 0.004;                % thickness wall 3
-wall3.m = wall3.rho * wall3.t;  % mass per unit area wall 3
-wall3.eta = 1E-4;               % loss factor wall 3
-wall3.E = 80E9;                 % young's modulus wall 3
-wall3.nu = 0.3;                 % poisson ratio wall 3
+glass1.rho = 2500;               % density wall 3
+glass1.t = 0.0042;                % thickness wall 3
+glass1.m = glass1.rho * glass1.t;  % mass per unit area wall 3
+glass1.eta = 1E-4;               % loss factor wall 3
+glass1.E = 80E9;                 % young's modulus wall 3
+glass1.nu = 0.3;                 % poisson ratio wall 3
 
 % glass 2
-wall4.rho = 2500;               % density wall 1
-wall4.t = 0.009;                % thickness wall 1
-wall4.m = wall4.rho * wall4.t;  % mass per unit area wall 1
-wall4.eta = 1E-4;               % loss factor wall 3
-wall4.E = 80E9;                 % young's modulus wall 3
-wall4.nu = 0.3;                 % poisson ratio wall 3
+glass2.rho = 2500;               % density wall 1
+glass2.t = 0.015;                % thickness wall 1
+glass2.m = glass2.rho * glass2.t;  % mass per unit area wall 1
+glass2.eta = 1E-4;               % loss factor wall 3
+glass2.E = 80E9;                 % young's modulus wall 3
+glass2.nu = 0.3;                 % poisson ratio wall 3
+
+% glass 3
+glass3.rho = 2500;               % density wall 1
+glass3.t = 0.0035;                % thickness wall 1
+glass3.m = glass3.rho * glass3.t;  % mass per unit area wall 1
+glass3.eta = 1E-4;               % loss factor wall 3
+glass3.E = 80E9;                 % young's modulus wall 3
+glass3.nu = 0.3;                 % poisson ratio wall 3
+
+% glass 4
+glass4.rho = 2500;               % density wall 1
+glass4.t = 0.012;                % thickness wall 1
+glass4.m = glass4.rho * glass4.t;  % mass per unit area wall 1
+glass4.eta = 1E-4;               % loss factor wall 3
+glass4.E = 80E9;                 % young's modulus wall 3
+glass4.nu = 0.3;                 % poisson ratio wall 3
+
 
 % distance between the walls
 d_1 = 0.25;                     % distance between wall 1 and wall 2
-d_glass = 0.005;                % distance between the glass panels
+d1_glass = 0.004;                % distance between the glass panels
+d2_glass = 0.006;
 d_34 = 0.25;                    % distance between wall 3 and wall 4
 
 f = 1:10000;                    % frequency domain
 
-doubleglass1.rho = 2500*(wall3.t + wall4.t)/(wall3.t + wall4.t + d_glass);
-doubleglass1.m = wall3.m + wall4.m;
-doubleglass1.t = (wall3.t + wall4.t + d_glass);  % mass per unit area wall 1
+doubleglass1.rho = 2500*(glass1.t + glass2.t)/(glass1.t + glass2.t + d1_glass);
+doubleglass1.m = glass1.m + glass2.m;
+doubleglass1.t = (glass1.t + glass2.t + d1_glass);  % mass per unit area wall 1
 doubleglass1.eta = 1E-4;               % loss factor wall 3
 doubleglass1.E = 80E9;                 % young's modulus wall 3
 doubleglass1.nu = 0.3;                 % poisson ratio wall 3
 
+doubleglass2.rho = 2500*(glass3.t + glass4.t)/(glass3.t + glass4.t + d2_glass);
+doubleglass2.m = glass3.m + glass4.m;
+doubleglass2.t = (glass3.t + glass4.t + d2_glass);  % mass per unit area wall 1
+doubleglass2.eta = 1E-4;               % loss factor wall 3
+doubleglass2.E = 80E9;                 % young's modulus wall 3
+doubleglass2.nu = 0.3;                 % poisson ratio wall 3
 
 %% reduction indexi of doublewalls and each wall 
 r12_double = mean_oct(f_c, doublewall(f,wall1,wall2,d_1,false));  % reduction index for doublewall (wall 1 and wall 2)
-r34_double = doublewall(f,wall3,wall4,d_glass,false);  % reduction index for doublewall (wall 3 and wall 4) 
+r_glass1 = doublewall(f,glass1,glass2,d1_glass,false);  % reduction index for doublewall (wall 3 and wall 4) 
+r_glass2 = doublewall(f,glass3,glass4,d2_glass,false);
 
-doubleglass1.r = r34_double;
+doubleglass1.r = r_glass1;
+doubleglass2.r = r_glass2;
 
-r_doubleglass = mean_oct(f_c, doubleglass(f,doubleglass1,doubleglass1,d_34));
+r_doubleglass = mean_oct(f_c, doubleglass(f,doubleglass1,doubleglass2,d_34));
 
 r1_single = mean_oct(f_c, singlewall(f,wall1));
 r2_single = mean_oct(f_c, singlewall(f,wall2));
-r3_single = singlewall(f,wall3);
-r4_single = singlewall(f,wall4);
+r3_single = singlewall(f,glass1);
+r4_single = singlewall(f,glass2);
 
 %% for having multiple wall sections:
 % this calculates the overall reduction index of the wall, when part of the
@@ -123,5 +149,12 @@ legend(Location='southoutside')
 figure
 semilogx(f_c, r_comb)
 legend('combined reduction index')
+grid on
+thickenall_big
+
+figure
+semilogx(f_c, r_doubleglass)
+legend('Reduction Index Window')
+ylim([20 100])
 grid on
 thickenall_big
