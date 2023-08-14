@@ -206,11 +206,11 @@ col3 = [1 1 0];
 % T_60 in concert hall
 fig_name = 'T_60_group7';
 f = figure;
-semilogx(f_oct, T_60_calc_empty,'--', 'Color', col1)
-hold on
 semilogx(f_oct, T_60_calc_occ, 'Color', col1)
-semilogx(f_oct, T_max(1,:),'--', 'Color', col2)
+hold on
+semilogx(f_oct, T_60_calc_empty,'--', 'Color', col1)
 semilogx(f_oct, T_max(2,:), 'Color', col2)
+semilogx(f_oct, T_max(1,:),'--', 'Color', col2)
 thickenall_big;
 xticks(f_oct);
 xticklabels({'63', '125', '250', '500', '1k', '2k', '4k'})
@@ -219,8 +219,10 @@ ylim([0 2.5])
 xlabel('f in Hz')
 ylabel('T_{60} in s')
 set(gca,'fontname','times')
-%set(gcf, 'color', 'none')
-%set(gca, 'color', 'none')
+legend('Minimum T_{60} with Audience','Minimum T_{60} without Audience','Maximum T_{60} with Audience','Maximum T_{60} without Audience', 'NumColumns', 2)
+legend(Location='southoutside')
+set(gcf, 'color', 'none')
+set(gca, 'color', 'none')
 
 %set(gcf, 'color', 'none');
 
@@ -239,15 +241,18 @@ thickenall_big;
 grid on
 xlabel('Distance in m')
 ylabel('C_{80}/G in dB')
-%legend('Clarity C_{80}','Strength G')
+legend('Clarity C_{80}','Strength G')
 xlim([5 35])
 ylim([-2 10])
 set(gca,'fontname','times')
-%set(gcf, 'color', 'none')
-%set(gca, 'color', 'none')
+legend(Location='southoutside')
+set(gcf, 'color', 'none')
+set(gca, 'color', 'none')
 exportPlot(f,'Plots/', fig_name, true)
 
-figure
+
+fig_name = 'C_80_G_Rehersal_group7';
+f = figure;
 plot(r_rehersal, C_80_rehersal(4,:), 'Color', col1)
 hold on
 plot(r_rehersal, G_rehersal(4,:), 'Color', col2)
@@ -259,9 +264,10 @@ legend('Clarity C_{80}','Strength G')
 xlim([1 10])
 ylim([5 20])
 set(gca,'fontname','times')
-%set(gcf, 'color', 'none')
-%set(gca, 'color', 'none')
-%exportPlot(f,'Plots/', fig_name, true)
+legend(Location='southoutside')
+set(gcf, 'color', 'none')
+set(gca, 'color', 'none')
+exportPlot(f,'Plots/', fig_name, true)
 
 
 % % lobby

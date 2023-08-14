@@ -21,9 +21,9 @@ function [] = exportPlot(f,filePathP,plotName,varargin)
     %Fix plot sizeand legend
     thickenall_big
     f.Position = [300, 0, 990, 788.8]; 
-    if  ~isempty(f.CurrentAxes.Legend) %|| 
-    f.CurrentAxes.Legend.Location=loc;        
-    end
+    %if  ~isempty(f.CurrentAxes.Legend) %|| 
+    %f.CurrentAxes.Legend.Location=loc;        
+    %end
     f.CurrentAxes.GridLineStyle ="-";
     grid on
 
