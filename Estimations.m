@@ -116,7 +116,7 @@ T_60_rehersal = zeros(length(n_person), length(A_wall));
 for i = n_person
     T_60_rehersal(i,:) = 0.163*V_rehersal./(n_person(i)*A_person + A_wall + A_absorber_rehersal_low + A_absorber_rehersal);
 end
-r_rehersal = 1:0.1:10;
+r_rehersal = 1:0.1:20;
 
 E_direct_rehersal = zeros(1,length(r_rehersal));
 E_direct_rehersal(:) = 100./r_rehersal.^2;
@@ -261,7 +261,7 @@ grid on
 xlabel('Distance in m')
 ylabel('C_{80}/G in dB')
 legend('Clarity C_{80}','Strength G')
-xlim([1 10])
+xlim([1 20])
 ylim([5 20])
 set(gca,'fontname','times')
 legend(Location='southoutside')
