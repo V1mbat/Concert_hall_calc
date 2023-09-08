@@ -1,7 +1,7 @@
 clear 
 close all
 clc
-
+%% new window values [35 53 67 60 52 53 66]
 %%
 L_facade = [71 73 75 80 66 54 50]; % SPL at facade
 NC_15 = [47 36 29 22 17 14 12];
